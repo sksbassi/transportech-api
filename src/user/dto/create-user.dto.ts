@@ -2,17 +2,17 @@ import { IsBoolean, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
-  idUser: string;
+  id: string;
   @IsString()
-  Document: string;
+  document: string;
   @IsString()
-  Password: string;
+  password: string;
   @IsString()
-  Name: string;
+  name: string;
   @IsString()
-  Phone: string;
+  phone: string;
   @IsString()
-  Email: string;
+  email: string;
   @IsBoolean()
-  Status: boolean;
+  status: boolean;
 }

@@ -10,18 +10,26 @@ export class UserService {
 
   private mapToEndity(user: any): User {
     return {
-      idUser: user.idUser,
-      Document: user.Document,
-      Password: user.Password,
-      Name: user.Name,
-      Phone: user.Phone,
-      Email: user.Email,
-      Status: user.Status,
+      id: user.id,
+      document: user.document,
+      password: user.password,
+      name: user.name,
+      phone: user.phone,
+      email: user.email,
+      status: user.status,
     };
   }
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const user = await this.prisma.user.create({
+      data: createUserDto,
+    });
+
+    return this.mapToEndity(user);
+  }
+
+  update(id: number, updateUserDto: UpdateUserDto) {
+    return `This action updates a #${id} user`;
   }
 
   async findAll(): Promise<User[]> {
@@ -31,10 +39,6 @@ export class UserService {
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
   }
 
   remove(id: number) {
