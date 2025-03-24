@@ -20,5 +20,5 @@ model user {
   name     String
   phone    String
   email    String
-  status   Boolean
+  status   Boolean @default(true)
 }

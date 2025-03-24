@@ -28,10 +28,6 @@ export class UserService {
     return this.mapToEndity(user);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
   async findAll(): Promise<User[]> {
     const user = await this.prisma.user.findMany();
     return user.map((user) => this.mapToEndity(user));
@@ -39,6 +35,14 @@ export class UserService {
 
   findOne(id: number) {
     return `This action returns a #${id} user`;
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.prisma.user.update({
+      where: { id },
+      data: updateUserDto,
+    });
+    return `This action updates a #${id} user`;
   }
 
   remove(id: number) {
