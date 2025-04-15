@@ -33,8 +33,13 @@ export class UserService {
     return user.map((user) => this.mapToEndity(user));
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id,
+      },
+    });
+    return this.mapToEndity(user);
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
@@ -42,10 +47,15 @@ export class UserService {
       where: { id },
       data: updateUserDto,
     });
-    return `This action updates a #${id} user`;
+    return user;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const user = await this.prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+    return this.mapToEndity(user);
   }
 }
