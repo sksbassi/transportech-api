@@ -22,7 +22,14 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const user = await this.prisma.user.create({
-      data: createUserDto,
+      data: {
+        document: createUserDto.document,
+        password: createUserDto.password,
+        name: createUserDto.name,
+        phone: createUserDto.phone,
+        email: createUserDto.email,
+        status: createUserDto.status,
+      },
     });
 
     return this.mapToEndity(user);
